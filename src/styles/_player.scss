@@ -1,0 +1,38 @@
+.Player{
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.514);
+
+    .time-control{
+        width: 50%;
+        display: flex;
+        background-color: #4d4d4d1e;
+        padding: 1rem 2rem;
+        color: #fff;
+        p{
+            padding: 0 1rem 0;
+        }
+
+        .slider{
+            width: 100%;
+        }
+    }
+
+
+.play-control {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;  
+       
+    svg{
+        
+        &:active{color: #fff;}
+        &:focus{color: #fff;}
+        &:hover{color: #fff;}
+    }
+}
+}

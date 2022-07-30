@@ -1,0 +1,41 @@
+.library{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    overflow: scroll;
+    margin-top: 6rem;
+}
+
+.library-song{
+
+    color: #fff;
+    gap: 1rem;
+    text-align: center;
+    border: 1px solid #fff;
+    margin: .5rem;
+    padding: .5rem;
+
+    .song-name{
+        font-size: .5em;
+    }
+    .song-artist{
+        font-size: .5em;
+    }
+    .song-name, .song-artist{
+        letter-spacing: 2px;
+    }
+
+    img{
+        width: 15vh;
+        margin: .5rem;
+    }
+}
+
+.library-songs{
+    display: flex;
+    flex-direction: column;
+    margin: 10rem 0;
+    padding: 1rem 2rem;
+}
