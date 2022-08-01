@@ -9,6 +9,7 @@ body {
   background-color: #000;
   width: 100vw;
   height: 100vh;
+  font-family: 'Roboto Slab', serif;
 }
 
 .App {
@@ -22,6 +23,7 @@ body {
 
 .App .inner-wrapper h1, .App .inner-wrapper h3 {
   color: rgba(255, 255, 255, 0.622);
+  font-weight: 400;
 }
 
 .Player {
@@ -121,24 +123,28 @@ body {
   width: 25%;
   height: 100%;
   overflow: scroll;
-  margin-top: 6rem;
+  margin: 6rem 1rem 0 0;
 }
 
 .library-song {
   color: #fff;
   gap: 1rem;
   text-align: center;
-  border: 1px solid #fff;
-  margin: .5rem;
-  padding: .5rem;
+  margin: .5rem 0rem;
+  padding: .5rem 0;
+  cursor: pointer;
+}
+
+.library-song:hover {
+  background-color: rgba(195, 167, 240, 0.322);
 }
 
 .library-song .song-name {
-  font-size: .5em;
+  font-size: 1.25em;
 }
 
 .library-song .song-artist {
-  font-size: .5em;
+  font-size: 1em;
 }
 
 .library-song .song-name, .library-song .song-artist {
@@ -158,7 +164,31 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 10rem 0;
-  padding: 1rem 2rem;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-base-color: aquamarine;
+  scrollbar-face-color: rgba(240, 255, 255, 0.452) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: aquamarine;
+  border-radius: 20px;
+  border: transparent;
+  -webkit-box-shadow: 3px 5px 20px #fff;
+          box-shadow: 3px 5px 20px #fff;
+}
+
+.selected {
+  background-color: rgba(195, 167, 240, 0.322);
 }
 /*# sourceMappingURL=style.css.map */

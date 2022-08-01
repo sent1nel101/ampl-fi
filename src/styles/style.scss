@@ -8,6 +8,7 @@ body{
     background-color: #000;
     width: 100vw;
     height: 100vh;
+    font-family: 'Roboto Slab', serif;
 }
 
 
@@ -20,8 +21,13 @@ body{
         text-align: left;
         h1, h3{
             color: rgba(255, 255, 255, 0.622);
+            font-weight: 400;
         }
     }
+
+    // .app-inner-wrapper{
+    //     transform: translateX(  20%);
+    // }
 }
 
 

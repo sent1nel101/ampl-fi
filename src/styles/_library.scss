@@ -5,7 +5,7 @@
     width: 25%;
     height: 100%;
     overflow: scroll;
-    margin-top: 6rem;
+    margin: 6rem 1rem 0 0;
 }
 
 .library-song{
@@ -13,15 +13,20 @@
     color: #fff;
     gap: 1rem;
     text-align: center;
-    border: 1px solid #fff;
-    margin: .5rem;
-    padding: .5rem;
+    // border: 1px solid #fff;
+    margin: .5rem 0rem;
+    padding: .5rem 0;
+    cursor: pointer;
+
+    &:hover{
+            background-color: rgba(195, 167, 240, 0.322);
+        }
 
     .song-name{
-        font-size: .5em;
+        font-size: 1.25em;
     }
     .song-artist{
-        font-size: .5em;
+        font-size: 1em;
     }
     .song-name, .song-artist{
         letter-spacing: 2px;
@@ -36,6 +41,29 @@
 .library-songs{
     display: flex;
     flex-direction: column;
-    margin: 10rem 0;
-    padding: 1rem 2rem;
+}
+
+*{
+    scrollbar-width: thin;
+    scrollbar-base-color: aquamarine;
+    scrollbar-face-color: rgba(240, 255, 255, 0.452) transparent;
+}
+
+*::-webkit-scrollbar{
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb{
+    background-color: aquamarine;
+    border-radius: 20px;
+    border: transparent;
+    box-shadow: 3px 5px 20px #fff;
+}
+
+.selected {
+    background-color: rgba(195, 167, 240, 0.322);
 }
