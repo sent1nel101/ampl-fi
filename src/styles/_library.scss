@@ -1,40 +1,45 @@
 .library{
     position: fixed;
-    top: 0;
+    top: 10%;
     left: 0;
-    width: 25%;
+    width: 20%;
     height: 100%;
     overflow: scroll;
-    margin: 6rem 1rem 0 0;
+    margin: 1rem 1rem 0 0;
+    padding-bottom: 3rem;
+    transform: translateX(-100%);
+    transition: all 1s ease;
+    opacity: 0;
 }
 
 .library-song{
 
     color: #fff;
-    gap: 1rem;
     text-align: center;
     // border: 1px solid #fff;
-    margin: .5rem 0rem;
+    margin: .5rem 3rem;
     padding: .5rem 0;
     cursor: pointer;
+    border-radius: 15px;
 
     &:hover{
-            background-color: rgba(195, 167, 240, 0.322);
+            background-color: rgba(215, 201, 238, 0.526);
+            color: #333;
         }
 
     .song-name{
-        font-size: 1.25em;
+        font-size: .75em;
     }
     .song-artist{
-        font-size: 1em;
+        font-size: .5em;
     }
     .song-name, .song-artist{
         letter-spacing: 2px;
     }
 
     img{
-        width: 15vh;
-        margin: .5rem;
+        width: 3rem;
+        margin: 0;
     }
 }
 
@@ -65,5 +70,11 @@
 }
 
 .selected {
-    background-color: rgba(195, 167, 240, 0.322);
+    background-color: rgb(213, 197, 244);
+    color: #333;
+}
+
+.active-library{
+    transform: translateX(0%);
+    opacity: 1;
 }

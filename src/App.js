@@ -3,24 +3,25 @@ import Player from './components/Player';
 import Song from './components/Song';
 import chillHop from './data'
 import Library from './components/Library';
+import Nav from './components/Nav';
+import './styles/style.css'
 
 function App() {
-
+// State
   const [songs, setSongs] = useState(chillHop())
   const [currentSong, setCurrentSong] = useState(songs[0])
   const [isPlaying, setIsPlaying] = useState(false)
-
-  
-  //Ref
-  const audioRef = useRef(null)
-
-    const [songInfo, setSongInfo] = useState({
+  const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0
   })
+  const [isActive, setIsActive] = useState(false)
+  //Ref
+  const audioRef = useRef(null)
+
   const timeUpdateHandler = (e) =>{
     const currentTime = e.target.currentTime
-    const duration = e.target.duration
+    const duration = e.target.duration || 0
     setSongInfo({...songInfo, currentTime, duration })
   }
     // Event handlers
@@ -28,13 +29,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="inner-wrapper">
-        <h1>Ampl-Fi</h1>
-        <h3> &amp; Chill Out...</h3>
-      </div>
+      <Nav isActive={isActive} setIsActive={setIsActive} />
       <div className="app-inner-wrapper">
         <Song currentSong={currentSong} />
         <Player 
+        songs={songs}
+        setCurrentSong={setCurrentSong}
         audioRef={audioRef} 
         isPlaying={isPlaying} 
         setIsPlaying={setIsPlaying} 
@@ -43,6 +43,8 @@ function App() {
         setSongInfo={setSongInfo}/>
       </div>
       <Library 
+      isActive={isActive}
+      setIsActive={setIsActive}
       audioRef={audioRef} 
       songs={songs} 
       setSongs={setSongs} 

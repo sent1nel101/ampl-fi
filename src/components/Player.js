@@ -8,7 +8,7 @@ import { faPlay,
 import '../styles/_player.scss'
 
 
-const Player = ({songInfo, setSongInfo, isPlaying, setIsPlaying, audioRef}) => {
+const Player = ({songInfo, songs, currentSong, setCurrentSong, setSongInfo, isPlaying, setIsPlaying, audioRef}) => {
   
   //State
 
@@ -20,10 +20,15 @@ const Player = ({songInfo, setSongInfo, isPlaying, setIsPlaying, audioRef}) => {
 
   // Event handlers
 const playSongHandler =()=>{
+  let playPromise = audioRef.current.play()
+  if (playPromise !== undefined){
+    playPromise.then(() => {
   if (!isPlaying)
   {audioRef.current.play()
-  setIsPlaying(!isPlaying)}
-  else return
+  setIsPlaying(!isPlaying)
+}  else return
+  })
+}
 }
 
 const pauseSongHandler =()=>{
@@ -38,6 +43,48 @@ const dragHandler =(e) => {
   setSongInfo({...songInfo, currentTime: e.target.value})
 }
 
+const skipTrackHandler = (direction) =>{
+  let currentIndex = songs.findIndex((song) => song.id === currentSong.id )
+  if (direction === 'forward'){
+    setCurrentSong(songs[(currentIndex + 1) % songs.length])
+    if (isPlaying){
+      const playPromise = audioRef.current.play()
+      if (playPromise !== undefined){
+        playPromise.then((audio) => {
+          audioRef.current.play()
+        })
+      }
+    }
+    audioRef.current.play()
+   
+  }else if (direction === 'back'){
+    if (currentIndex > 0){
+      setCurrentSong(songs[(currentIndex - 1)])
+      if (isPlaying){
+      const playPromise = audioRef.current.play()
+      if (playPromise !== undefined){
+        playPromise.then((audio) => {
+          audioRef.current.play()
+        })
+      }
+    }
+    audioRef.current.play()
+    } else {
+      setCurrentSong(songs[(songs.length - 1)])
+     if (isPlaying){
+      const playPromise = audioRef.current.play()
+      if (playPromise !== undefined){
+        playPromise.then((audio) => {
+          audioRef.current.play()
+        })
+      }
+    }
+    audioRef.current.play()
+    }
+  }
+  
+}
+
 
   return (
     <div className="Player">
@@ -47,9 +94,9 @@ const dragHandler =(e) => {
             <p>{getTime(songInfo.duration)}</p>
         </div>
         <div className="play-control">
-            <FontAwesomeIcon className="back player-controls" icon={faAngleLeft} size="2x" style={{cursor: "pointer"}}/>
+            <FontAwesomeIcon onClick={() => skipTrackHandler('back')} className="back player-controls" icon={faAngleLeft} size="2x" style={{cursor: "pointer"}}/>
             { isPlaying ? <FontAwesomeIcon onClick={pauseSongHandler} className="pause player-controls" icon={faPause} size="2x" style={{cursor: "pointer"}} /> :  <FontAwesomeIcon onClick={playSongHandler} className="play player-controls" icon={faPlay} size="2x" style={{cursor: "pointer"}} /> }
-            <FontAwesomeIcon className="forward player-controls" icon={faAngleRight} size="2x" style={{cursor: "pointer"}} />
+            <FontAwesomeIcon onClick={() => skipTrackHandler('forward')} className="forward player-controls" icon={faAngleRight} size="2x" style={{cursor: "pointer"}} />
         </div>
         
     </div>
