@@ -5,12 +5,9 @@ import { faPlay,
         faAngleLeft,
         faAngleRight
 } from '@fortawesome/free-solid-svg-icons'
-import '../styles/_player.scss'
 
 
-const Player = ({songInfo, songs, currentSong, setCurrentSong, setSongInfo, isPlaying, setIsPlaying, audioRef}) => {
-  
-  //State
+const Player = ({ songInfo, setSongInfo, audioRef, isPlaying, setIsPlaying, songs, currentSong, setCurrentSong }) => {
 
   const getTime =(time) =>{
     return (
@@ -19,16 +16,22 @@ const Player = ({songInfo, songs, currentSong, setCurrentSong, setSongInfo, isPl
   }
 
   // Event handlers
+  const skipTrackHandler = (direction) => {
+        let currentSongIndex = songs.findIndex(song => song.id === currentSong.id);
+        console.log({currentSongIndex});
+        if(direction === 'skip-forward'){
+            setCurrentSong(songs[currentSongIndex+1 === songs.length ? 0 : currentSongIndex+1]);
+        }
+        if(direction === 'skip-back'){
+            setCurrentSong(songs[currentSongIndex-1 < 0 ? songs.length-1 : currentSongIndex-1]);
+        }
+    }
+
 const playSongHandler =()=>{
-  let playPromise = audioRef.current.play()
-  if (playPromise !== undefined){
-    playPromise.then(() => {
   if (!isPlaying)
   {audioRef.current.play()
-  setIsPlaying(!isPlaying)
-}  else return
-  })
-}
+  setIsPlaying(!isPlaying)}
+  else return
 }
 
 const pauseSongHandler =()=>{
@@ -43,48 +46,6 @@ const dragHandler =(e) => {
   setSongInfo({...songInfo, currentTime: e.target.value})
 }
 
-const skipTrackHandler = (direction) =>{
-  let currentIndex = songs.findIndex((song) => song.id === currentSong.id )
-  if (direction === 'forward'){
-    setCurrentSong(songs[(currentIndex + 1) % songs.length])
-    if (isPlaying){
-      const playPromise = audioRef.current.play()
-      if (playPromise !== undefined){
-        playPromise.then((audio) => {
-          audioRef.current.play()
-        })
-      }
-    }
-    audioRef.current.play()
-   
-  }else if (direction === 'back'){
-    if (currentIndex > 0){
-      setCurrentSong(songs[(currentIndex - 1)])
-      if (isPlaying){
-      const playPromise = audioRef.current.play()
-      if (playPromise !== undefined){
-        playPromise.then((audio) => {
-          audioRef.current.play()
-        })
-      }
-    }
-    audioRef.current.play()
-    } else {
-      setCurrentSong(songs[(songs.length - 1)])
-     if (isPlaying){
-      const playPromise = audioRef.current.play()
-      if (playPromise !== undefined){
-        playPromise.then((audio) => {
-          audioRef.current.play()
-        })
-      }
-    }
-    audioRef.current.play()
-    }
-  }
-  
-}
-
 
   return (
     <div className="Player">
@@ -94,9 +55,9 @@ const skipTrackHandler = (direction) =>{
             <p>{getTime(songInfo.duration)}</p>
         </div>
         <div className="play-control">
-            <FontAwesomeIcon onClick={() => skipTrackHandler('back')} className="back player-controls" icon={faAngleLeft} size="2x" style={{cursor: "pointer"}}/>
+            <FontAwesomeIcon onClick={() => skipTrackHandler('skip-back')} className="back player-controls" icon={faAngleLeft} size="2x" style={{cursor: "pointer"}}/>
             { isPlaying ? <FontAwesomeIcon onClick={pauseSongHandler} className="pause player-controls" icon={faPause} size="2x" style={{cursor: "pointer"}} /> :  <FontAwesomeIcon onClick={playSongHandler} className="play player-controls" icon={faPlay} size="2x" style={{cursor: "pointer"}} /> }
-            <FontAwesomeIcon onClick={() => skipTrackHandler('forward')} className="forward player-controls" icon={faAngleRight} size="2x" style={{cursor: "pointer"}} />
+            <FontAwesomeIcon onClick={() => skipTrackHandler('skip-forward')} className="forward player-controls" icon={faAngleRight} size="2x" style={{cursor: "pointer"}} />
         </div>
         
     </div>

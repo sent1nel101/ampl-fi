@@ -1,34 +1,39 @@
 .library{
     position: fixed;
-    top: 10%;
+    top: 0;
     left: 0;
-    width: 20%;
-    height: 100%;
+    width: 25%;
+    height: 100vh;
     overflow: scroll;
-    margin: 1rem 1rem 0 0;
-    padding-bottom: 3rem;
+    margin-top: 10rem;
+    padding-top: 20rem;
     transform: translateX(-100%);
-    transition: all 1s ease;
     opacity: 0;
+    transition: all 1s ease;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2{
+        position: absolute;
+        top: 0;
+    }
 }
 
 .library-song{
 
     color: #fff;
+    gap: 1rem;
     text-align: center;
-    // border: 1px solid #fff;
-    margin: .5rem 3rem;
-    padding: .5rem 0;
-    cursor: pointer;
-    border-radius: 15px;
-
-    &:hover{
-            background-color: rgba(215, 201, 238, 0.526);
-            color: #333;
-        }
+    margin: .5rem;
+    padding: 1rem .5rem .5rem;
+    transition: all 1s ease;
+    opacity: .3;
 
     .song-name{
-        font-size: .75em;
+        font-size: .5em;
     }
     .song-artist{
         font-size: .5em;
@@ -38,43 +43,62 @@
     }
 
     img{
-        width: 3rem;
-        margin: 0;
+        width: 15vh;
+        min-width: 100px;
+        margin: .5rem;
+        border-radius: 15px;
+    }
+
+    &:hover{
+        transform: scale(1.1);
+        color: #fff;
+        opacity: .8;
     }
 }
 
 .library-songs{
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+    margin: 28rem 0;
+    padding: 15rem 0 5rem;
 }
 
-*{
-    scrollbar-width: thin;
-    scrollbar-base-color: aquamarine;
-    scrollbar-face-color: rgba(240, 255, 255, 0.452) transparent;
-}
-
-*::-webkit-scrollbar{
+/* width */
+::-webkit-scrollbar {
     width: 5px;
 }
 
-*::-webkit-scrollbar-track{
+/* Track */
+::-webkit-scrollbar-track {
     background: transparent;
 }
 
-*::-webkit-scrollbar-thumb{
-    background-color: aquamarine;
-    border-radius: 20px;
-    border: transparent;
-    box-shadow: 3px 5px 20px #fff;
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+    height: 100px;
 }
 
-.selected {
-    background-color: rgb(213, 197, 244);
-    color: #333;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #fff;
 }
 
-.active-library{
-    transform: translateX(0%);
+.selected{
+    transform: scale(1.2);
+    color: #fff;
+    margin: 1rem 0;
     opacity: 1;
+}
+
+.library-active{
+    transform:translate(0);
+    opacity: 1;
+}
+
+.relative{
+    position: relative;
 }

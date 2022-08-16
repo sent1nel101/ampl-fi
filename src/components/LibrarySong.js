@@ -1,41 +1,45 @@
 import React from 'react'
 
-const LibrarySong = ({ song, songs, setSongs, setCurrentSong, audioRef, isPlaying, isActive, setIsActive }) => {
+const LibrarySong = ({ song, songs, setSongs, currentSong, setCurrentSong, setIsPlaying, id }) => {
 
-  const songSelectHandler = () => {
-    setCurrentSong(song)
-    // Active toggle
-    setSongs(songs.map((targetSong) =>{
-      if (targetSong.id === song.id ){
-        return {
-        ...targetSong,
+  // const songSelectHandler = () =>  {
+  //   if (isPlaying){
+  //     const playPromise = audioRef.current.play()
+  //     setCurrentSong(song)
+  //     if (playPromise !== undefined){
+  //       playPromise.then((audio) => {
+  //         audioRef.current.play()
+  //       })
+  //     }
+  //   }
+  // }
+
+  const songSelectHandler = async () => {
+    await setCurrentSong(song);
+    setIsPlaying(true);
+    const newSongs = songs.map((song) => {
+     if (song.id === id){
+      return {
+        ...song,
         active: true,
       }
-    }else{
-      return {
-        ...targetSong,
-        active: false,
+    }else {
+        return {
+          ...song,
+          active: false,
+        }
       }
-    }
-    },
-    setIsActive(!isActive)
-    ))
-    // check if song is playing
-    if (isPlaying){
-      const playPromise = audioRef.current.play()
-      if (playPromise !== undefined){
-        playPromise.then((audio) => {
-          audioRef.current.play()
-        })
-      }
-    }
-    audioRef.current.play()
-  }
+  })
+  setSongs(newSongs) 
+};
   return (
-    <div className={`library-song ${song.active ? 'selected' : ''}`} onClick={songSelectHandler}>
+    <div 
+    onClick={songSelectHandler} 
+    className={`library-song ${song.id === currentSong.id ? "selected" : ""} `}
+    >
         <img alt={song.name} src={song.cover} />
-        <p className="song-name"> {song.name}</p>
-        <p className="song-artist">{song.artist}</p>
+        <p className="song-name">{song.name}</p>
+        <h6 className="song-artist">{song.artist}</h6>
     </div>
   )
 }
