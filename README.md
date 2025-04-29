@@ -1,3 +1,5 @@
+HTML, CSS, JavaScript, ReactJS
+
 React-based music player for small, but expandable library of royalty-free Chill-Hop and Trap Music.
 All rights to the creators of the music. Not for monetisation.
 
